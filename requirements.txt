@@ -5,3 +5,4 @@ asyncpg
 sqlalchemy[asyncio]
 psycopg2-binary
 PyPDF2
+python-multipart

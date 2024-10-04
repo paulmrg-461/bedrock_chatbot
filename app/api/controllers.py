@@ -1,7 +1,7 @@
 from fastapi import APIRouter, UploadFile, File
-from app.core.bedrock_client import BedrockClient
-from app.services.pdf_extractor import PdfExtractor
-from app.api.schemas import PromptRequest, PromptResponse
+from core.bedrock_client import BedrockClient
+from services.pdf_extractor import PdfExtractor
+from api.schemas import PromptRequest, PromptResponse
 
 router = APIRouter()
 
