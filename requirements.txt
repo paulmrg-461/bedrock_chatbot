@@ -1,2 +1,7 @@
-PyPDF2
+fastapi
+uvicorn
 boto3
+asyncpg
+sqlalchemy[asyncio]
+psycopg2-binary
+PyPDF2
