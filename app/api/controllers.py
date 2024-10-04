@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, UploadFile, File
 from app.core.bedrock_client import BedrockClient
+from app.services.pdf_extractor import PdfExtractor
 from app.api.schemas import PromptRequest, PromptResponse
 
 router = APIRouter()
@@ -15,3 +16,16 @@ async def generate_response(request: PromptRequest):
         prompt=request.prompt
     )
     return PromptResponse(response=result)
+
+@router.post("/extract-pdf")
+async def extract_pdf(file: UploadFile = File(...)):
+    # Guardar el archivo temporalmente
+    file_location = f"/tmp/{file.filename}"
+    with open(file_location, "wb+") as f:
+        f.write(file.file.read())
+    
+    # Usar PdfExtractor para extraer texto
+    pdf_extractor = PdfExtractor(file_location)
+    extracted_text = pdf_extractor.extract_text()
+
+    return {"text": extracted_text}
